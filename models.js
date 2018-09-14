@@ -1,4 +1,5 @@
-const uuid = require("uuid");
+'use strict';
+const uuid = require('uuid');
 
 // this module provides volatile storage, using a `ShoppingList`
 // and `Recipes` model. We haven't learned about databases yet,
@@ -12,12 +13,12 @@ const uuid = require("uuid");
 
 function StorageException(message) {
   this.message = message;
-  this.name = "StorageException";
+  this.name = 'StorageException';
 }
 
 const ShoppingList = {
   create: function(name, checked) {
-    console.log("Creating new shopping list item");
+    console.log('Creating new shopping list item');
     const item = {
       name: name,
       id: uuid.v4(),
@@ -27,7 +28,7 @@ const ShoppingList = {
     return item;
   },
   get: function() {
-    console.log("Retrieving shopping list items");
+    console.log('Retrieving shopping list items');
     return Object.keys(this.items).map(key => this.items[key]);
   },
   delete: function(id) {
@@ -55,7 +56,7 @@ function createShoppingList() {
 
 const Recipes = {
   create: function(name, ingredients) {
-    console.log("Creating a new recipe");
+    console.log('Creating a new recipe');
     const item = {
       name: name,
       id: uuid.v4(),
@@ -65,7 +66,7 @@ const Recipes = {
     return item;
   },
   get: function() {
-    console.log("Retreiving recipes");
+    console.log('Retreiving recipes');
     return Object.keys(this.items).map(key => this.items[key]);
   },
   delete: function(itemId) {

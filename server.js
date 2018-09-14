@@ -1,27 +1,28 @@
-const express = require("express");
-const morgan = require("morgan");
+'use strict';
+const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
 app.use(express.json());
 
-const shoppingListRouter = require("./shoppingListRouter");
-const recipesRouter = require("./recipesRouter");
+const shoppingListRouter = require('./shoppingListRouter');
+const recipesRouter = require('./recipesRouter');
 
 // log the http layer
-app.use(morgan("common"));
+app.use(morgan('common'));
 
-app.use(express.static("public"));
+app.use(express.static('public'));
 
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 // when requests come into `/shopping-list` or
 // `/recipes`, we'll route them to the express
 // router instances we've imported. Remember,
 // these router instances act as modular, mini-express apps.
-app.use("/shopping-list", shoppingListRouter);
-app.use("/recipes", recipesRouter);
+app.use('/shopping-list', shoppingListRouter);
+app.use('/recipes', recipesRouter);
 
 // both runServer and closeServer need to access the same
 // server object, so we declare `server` here, and then when
@@ -39,7 +40,7 @@ function runServer() {
         console.log(`Your app is listening on port ${port}`);
         resolve(server);
       })
-      .on("error", err => {
+      .on('error', err => {
         reject(err);
       });
   });
@@ -50,7 +51,7 @@ function runServer() {
 // create one.
 function closeServer() {
   return new Promise((resolve, reject) => {
-    console.log("Closing server");
+    console.log('Closing server');
     server.close(err => {
       if (err) {
         reject(err);
